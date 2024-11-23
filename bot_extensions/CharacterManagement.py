@@ -19,43 +19,53 @@ class CharacterManagement(commands.Cog):
         logger.info("character management extension init")
 
     # give info about user. current character and list of characters.
-    @commands.command()
+    @commands.command(
+        brief="See a list of all characters, as well as which is active."
+    )
     async def characters(self, ctx, *args):
         await ctx.message.delete()
-        discord_id = ctx.author.id
-        message = command.aboutme(discord_id) 
+        discordId = ctx.author.id
+        message = command.aboutme(discordId) 
         await ctx.send(message, delete_after=15.0)
 
     # register new user 
-    @commands.command()
+    @commands.command(
+        brief="Register yourself as a bot user."
+    )
     async def register(self, ctx, *args):
         await ctx.message.delete()
-        discord_id = ctx.author.id
-        message = command.register(discord_id)
+        discordId = ctx.author.id
+        message = command.register(discordId)
         await ctx.send(message, delete_after=15.0)
 
     # switch between characters
-    @commands.command()
+    @commands.command(
+        brief="Switch between your saved characters."
+    )
     async def playas(self, ctx, first, *args):
         await ctx.message.delete()
-        discord_id = ctx.author.id
-        message = command.playas(discord_id, first)
+        discordId = ctx.author.id
+        message = command.playas(discordId, first)
         await ctx.send(message, delete_after=15.0)
 
     # create new character
-    @commands.command()
+    @commands.command(
+        brief="Create a new character with a provided first and last name."
+    )
     async def create(self, ctx, first, last, *args):
         await ctx.message.delete()
-        discord_id = ctx.author.id
+        discordId = ctx.author.id
         template = "5e"
         if len(args) > 1:
             template = args[0]
 
-        message = command.create_character(discord_id, first, last, template)
+        message = command.create_character(discordId, first, last, template)
         await ctx.send(message, delete_after=15.0)
 
     # download current character as JSON doc
-    @commands.command()
+    @commands.command(
+        brief="Download a file representing your active character."
+    )
     async def download(self, ctx, *args):
         await ctx.message.delete()
         participant = ctx.author.id
@@ -75,14 +85,16 @@ class CharacterManagement(commands.Cog):
         os.remove(fileName)
 
     # overwrite current character with JSON doc
-    @commands.command()
+    @commands.command(
+        brief="Upload a file to overwrite or create a character."
+    )
     async def upload(self, ctx):
-        discord_id = ctx.author.id
+        discordId = ctx.author.id
         try:
             attachment_url = ctx.message.attachments[0].url
             file_request = requests.get(attachment_url)
             contents = json.loads(file_request.content.decode("utf-8"))
-            contents["discordId"] = str(discord_id)
+            contents["discordId"] = str(discordId)
             contents[UPDATE_FLAG] = True
             first = contents['first']
             last = contents['last']

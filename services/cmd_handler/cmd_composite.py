@@ -93,7 +93,7 @@ def compositeSubject(compositeName: str, tokens: list, characterData: dict):
         utils.setUpdateFlag(characterData)
         return utils.buildCommandResponse(f"updated \"{compositeName}\": " + json.dumps(composite, indent=4))
     else:
-        raise InvalidArgumentException(tokens[0], f"Expected an increment (+1, -12, etc) or a set argument (max=100). Received {tokens[0]}")
+        raise InvalidArgumentException(tokens[0], f"Expected a set argument (like \"max=100\"). Received {tokens[0]}")
 
 def compositeRemove(compositeName: str, composite: dict, tokens: list):
     key = tokens[0]

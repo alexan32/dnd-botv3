@@ -8,12 +8,12 @@ Row = Query()
 script_dir = os.path.dirname(__file__)
 logger = LOGGER
 
-def get_active_character(discord_id, user_table, character_table):
+def get_active_character(discordId, user_table, character_table):
     status = 200
     message = "ok"
     data = None
 
-    _status, _, user = user_table.get_user(discord_id)
+    _status, _, user = user_table.get_user(discordId)
     if _status != 200:
         return "Encountered an issue. Please try again later."
     
@@ -21,7 +21,7 @@ def get_active_character(discord_id, user_table, character_table):
     if not first:
         return 400, "User's active character is not set.", data
     
-    return character_table.get_character(discord_id, first)
+    return character_table.get_character(discordId, first)
 
 
 # wrapper for user table
@@ -47,8 +47,8 @@ class LocalUserTable:
 
         return 200, "ok", None
     
-    def set_active_character(self, discord_id, first):
-        status, message, user_data = self.get_user(discord_id)
+    def set_active_character(self, discordId, first):
+        status, message, user_data = self.get_user(discordId)
         if status != 200:
             return status, message, None
         
@@ -124,4 +124,7 @@ class LocalCharacterTable:
         status = 200
         message = "ok"
         data = None
+
+        self.table.upsert(character_data, ((Row.discordId == character_data['discordId']) & (Row.first == character_data['first'])))
+
         return status, message, data

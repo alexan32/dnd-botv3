@@ -25,6 +25,23 @@ intents.message_content = True
 
 # CONFIGURE BOT COMMANDS
 bot = commands.Bot(command_prefix="!", intents=intents)
+bot.remove_command('help')
+
+@bot.command(
+    brief="Get help with bot commands."
+)
+async def help(ctx, command_name: str=None):
+    await ctx.message.delete()
+    if command_name is None:
+        commands_list = '\n'.join([f"- {cmd.name}:".ljust(20) + str(cmd.short_doc) for cmd in bot.commands])
+        help_message = f"=====Help Menu=====\n\n{commands_list}\n\nFor more details type \"!help <command>\""
+        await ctx.send(f"```{help_message}```", delete_after=120)
+    else:
+        command = bot.get_command(command_name)
+        if command:
+            await ctx.send(f"```{command.help}```", delete_after=120)
+        else:
+            await ctx.send(f"```No command called {command_name} found.```", delete_after=15)
 
 @bot.event
 async def on_ready():

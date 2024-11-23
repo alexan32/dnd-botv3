@@ -1,7 +1,12 @@
 from config.config import LOGGER
 import discord
+import asyncio
 
 logger = LOGGER
+
+async def delete_after(ctx, seconds):
+    await asyncio.sleep(seconds)
+    await ctx.message.delete()
 
 def getContextInfo(bot, ctx):
     guild = bot.get_guild(ctx.guild.id)
