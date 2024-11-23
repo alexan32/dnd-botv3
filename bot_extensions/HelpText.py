@@ -11,7 +11,7 @@ roll_long="""A roll is an arithmetic expression that may include dice rolls. You
     This will create or overwrite a roll called "stealth"
 
 !roll list <page>
-    Returns a list of rolls. If there are multiple pages, you can add an optional page argument to see a different page.
+    Returns a list of rolls. If there are multiple pages, you can add an optional page argument to see a different page. ` indicates a roll is a composite. Counters appear as "total / max".
 
 !roll search stealth
     Returns a search for a roll called "stealth"
@@ -45,4 +45,43 @@ composite_long="""A composite is a \"roll\" that is made by adding multiple roll
 
 !composite acrobatics remove proficiency
     Remove the roll labeld "proficiency" from the "acrobatics" composite
+"""
+
+counter_long="""A counter has a total, a max value, and a min value. The total can never go above the max or below the min.
+
+    {
+        total: 10,
+        max: 10,
+        min: 0
+    }
+
+!counter create hitpoints
+    Creates a new counter called "hitpoints". The default max is 10, and the default min is 0. The total will start at the max.
+
+!counter create hitpoints max=100 total=8
+    Creates a new counter with a specified max and current total
+
+!counter hitpoints max
+    Set the hitpoint counter total to the maximum value
+
+!counter hitpoints min
+    Set the hitpoint coutner total to the minimum value
+
+!counter hitpoints total=20
+    Set the hitpoint counter total to 20.
+
+!counter hitpoints +8
+    Increase the counter total by 8
+
+!counter hitpoints -8
+    Reduce the counter total by 8
+
+!counter list <page>
+    Returns a list of counters. If there are multiple pages, you can add an optional page argument to see a different page.
+
+!counter search hitpoints
+    Returns a search for a counter called hitpoints
+
+!counter delete hitpoints
+    Attempts to delete a counter called hitpoints
 """

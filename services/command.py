@@ -72,6 +72,7 @@ def command_handler(discordId, _input:str):
         messages = execute(_input, characterData)
     except Exception as e:
         logger.info(f"{discordId} entered \"{_input}\" resulting in {e}")
+        return [f"Failed to resolve \"{_input}\""]
     else:
         character_table.update_character(characterData)
 

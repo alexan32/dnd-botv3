@@ -12,9 +12,11 @@ class Command(commands.Cog):
         self.bot = bot
         logger.info("Command extension init")
 
-    @commands.command()
+    @commands.command(
+        brief="Create, list, search, delete, or modify counters.",
+        help=counter_long
+    )
     async def counter(self, ctx, *args):
-        delete_after(ctx, 60.0)
 
         discordId = ctx.author.id
         _input = "counter " + " ".join(args)
@@ -23,13 +25,13 @@ class Command(commands.Cog):
         
         for response in responses:
             await ctx.send(f"```{response}```", delete_after=60)
+        await delete_after(ctx, 10.0)
 
     @commands.command(
         brief="View, edit, search, or delete \"composite\" rolls.",
         help=composite_long
     )
     async def composite(self, ctx, *args):
-        delete_after(ctx, 60.0)
 
         discordId = ctx.author.id
 
@@ -39,11 +41,11 @@ class Command(commands.Cog):
         
         for response in responses:
             await ctx.send(f"```{response}```", delete_after=60)
+        await delete_after(ctx, 10.0)
 
 
     @commands.command()
     async def func(self, ctx, *args):
-        delete_after(ctx, 60.0)
 
         discordId = ctx.author.id
 
@@ -53,6 +55,7 @@ class Command(commands.Cog):
         
         for response in responses:
             await ctx.send(f"```{response}```")
+        await delete_after(ctx, 10.0)
 
 
     @commands.command(            
@@ -60,11 +63,10 @@ class Command(commands.Cog):
         help=roll_long
     )
     async def roll(self, ctx, first_arg, *args):
-        await ctx.message.delete()
 
         discordId = ctx.author.id
 
-        _input = "roll " + first_arg + " ".join(args)
+        _input = "roll " + first_arg + " " + " ".join(args)
         
         responses = command.command_handler(discordId, _input)
         
@@ -72,8 +74,14 @@ class Command(commands.Cog):
             for response in responses:
                 await ctx.send(f"```{response}```", delete_after=120)
         else:
+
+            status, message, character = command.get_active_character(discordId, command.user_table, command.character_table)
+            first = character['first']
+            last = character['last']
+
             for response in responses:
-                await ctx.send(f"```{response}```")
+                await ctx.send(f"```{first} {last} rolled {response}```")
+        await delete_after(ctx, 10.0)
 
         
 async def setup(bot):
