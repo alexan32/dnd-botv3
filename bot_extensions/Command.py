@@ -5,7 +5,7 @@ import services.command as command
 
 logger = config.LOGGER
 
-class CommandCog(commands.Cog):
+class Command(commands.Cog):
 
     def __init__(self, bot):
         self.bot = bot
@@ -13,4 +13,4 @@ class CommandCog(commands.Cog):
 
         
 async def setup(bot):
-    await bot.add_cog(CommandCog(bot))
+    await bot.add_cog(Command(bot))

@@ -29,8 +29,8 @@ bot = commands.Bot(command_prefix="!", intents=intents)
 @bot.event
 async def on_ready():
     logger.info("loading bot extensions.")
-    await bot.load_extension("bot_extensions.CharacterManagementCog")
-    await bot.load_extension("bot_extensions.CommandCog")
+    await bot.load_extension("bot_extensions.CharacterManagement")
+    await bot.load_extension("bot_extensions.Command")
     logger.info("======= BOT IS READY! =======")
 
 # LAUNCH BOT

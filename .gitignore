@@ -3,3 +3,5 @@ services/*.json
 __pycache__
 character-min.json
 character2.json
+database/characters.json
+database/users.json
