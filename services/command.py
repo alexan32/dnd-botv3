@@ -56,7 +56,7 @@ def aboutme(discordId):
     if status != 200:
         return GENERIC_ERROR_MESSAGE
     active_character = user_data['activeCharacter']
-    response = f"Active character: {active_character}\nTotal characters: {len(character_list)}"
+    response = f"Discord id: {discordId}\nActive character: {active_character}\nTotal characters: {len(character_list)}"
     for x in character_list:
         response += f"\n- {x['first']} {x['last']}"
     return response

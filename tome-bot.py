@@ -53,8 +53,9 @@ async def on_ready():
 @bot.event
 async def on_command_error(ctx, error):
     if isinstance(error, discord.ext.commands.errors.CommandNotFound):
-        await ctx.send("```Command not found. Use \"!help\" to see a list of valid commands.```")
+        await ctx.send("```Command not found! Use \"!help\" to see a list of valid commands.```")
     else:
+        logger.error(error)
         await ctx.send("```Oops! Something went wrong.```", delete_after=60)
 
 # LAUNCH BOT

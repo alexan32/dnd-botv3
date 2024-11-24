@@ -1,11 +1,11 @@
 {
-    "characterId": "UUID",
-    "participant": "UUID",
+    "discordId": null,
+    "first": "",
+    "last": "",
     "meta": {},
     "functions": {},
     "articles": {},
     "counters": {},
     "rolls": {},
-    "composites": {},
-    "saveFlag": false
+    "composites": {}
 }

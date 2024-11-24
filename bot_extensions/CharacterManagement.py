@@ -94,8 +94,8 @@ class CharacterManagement(commands.Cog):
             attachment_url = ctx.message.attachments[0].url
             file_request = requests.get(attachment_url)
             contents = json.loads(file_request.content.decode("utf-8"))
-            contents["discordId"] = str(discordId)
-            contents[UPDATE_FLAG] = True
+            contents["discordId"] = discordId
+            # contents[UPDATE_FLAG] = True
             first = contents['first']
             last = contents['last']
         except Exception as e:

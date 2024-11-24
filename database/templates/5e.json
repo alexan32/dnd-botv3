@@ -1,6 +1,5 @@
 {
-    "characterId": "UUID",
-    "participant": "UUID",
+    "discordId": null,
     "first": "",
     "last": "",
     "meta": {},
