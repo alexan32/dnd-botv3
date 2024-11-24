@@ -50,5 +50,12 @@ async def on_ready():
     await bot.load_extension("bot_extensions.Command")
     logger.info("======= BOT IS READY! =======")
 
+@bot.event
+async def on_command_error(ctx, error):
+    if isinstance(error, discord.ext.commands.errors.CommandNotFound):
+        await ctx.send("```Command not found. Use \"!help\" to see a list of valid commands.```")
+    else:
+        await ctx.send("```Oops! Something went wrong.```", delete_after=60)
+
 # LAUNCH BOT
 bot.run(config.ENVIRONMENT["token"], log_handler=logHandler)

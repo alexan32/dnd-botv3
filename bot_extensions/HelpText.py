@@ -85,3 +85,21 @@ counter_long="""A counter has a total, a max value, and a min value. The total c
 !counter delete hitpoints
     Attempts to delete a counter called hitpoints
 """
+
+func_long="""Create, modify, delete functions capable of executing commands
+
+!func create dagger | roll dagger_hit; roll dagger_dmg
+    Creates a function that executes two different roll commands
+
+!func create cast $slot | counter $slot -1; roll spell_hit; roll spell_save;
+    Creates a function that takes an argument
+
+!func cast first
+    Executes the "cast" function with an argument present for the counter command.
+
+!func list <page>
+    Returns a list of funcs. If there are multiple pages, you can add an optional page argument to see a different page.
+
+!func delete dagger
+    Deletes a function called dagger
+"""

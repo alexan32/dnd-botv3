@@ -44,7 +44,11 @@ class Command(commands.Cog):
         await delete_after(ctx, 10.0)
 
 
-    @commands.command()
+    @commands.command(
+        brief="execute saved command macros",
+        help=func_long,
+        aliases=["macro", "function"]
+    )
     async def func(self, ctx, *args):
 
         discordId = ctx.author.id
