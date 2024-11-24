@@ -43,12 +43,17 @@ async def help(ctx, command_name: str=None):
         else:
             await ctx.send(f"```No command called {command_name} found.```", delete_after=15)
 
+LOADED = False
+
 @bot.event
 async def on_ready():
-    logger.info("loading bot extensions.")
-    await bot.load_extension("bot_extensions.CharacterManagement")
-    await bot.load_extension("bot_extensions.Command")
-    logger.info("======= BOT IS READY! =======")
+    
+    if not LOADED:
+        logger.info("loading bot extensions.")
+        await bot.load_extension("bot_extensions.CharacterManagement")
+        await bot.load_extension("bot_extensions.Command")
+        logger.info("======= BOT IS READY! =======")
+        LOADED = True
 
 @bot.event
 async def on_command_error(ctx, error):
