@@ -1,4 +1,4 @@
-roll_long="""A roll is an arithmetic expression that may include dice rolls. You can include variables inside of the expression as well, which refer to other saved rolls. For example:
+roll_long="""A roll is an arithmetic expression that may include dice rolls. You can include variables inside of the expression which refer to other saved rolls, counters, and composites. For example:
 
     !roll a=1d8
     !roll b=a + 7
@@ -8,7 +8,7 @@ roll_long="""A roll is an arithmetic expression that may include dice rolls. You
     If there is a roll called "stealth", then this command will roll the dice and resolve the expression
 
 !roll stealth = 1d20 + dex + expert
-    This will create or overwrite a roll called "stealth"
+    Create or overwrite a roll called "stealth"
 
 !roll list <page>
     Returns a list of rolls. If there are multiple pages, you can add an optional page argument to see a different page. ` indicates a roll is a composite. Counters appear as "total / max".
@@ -102,4 +102,29 @@ func_long="""Create, modify, delete functions capable of executing commands
 
 !func delete dagger
     Deletes a function called dagger
+"""
+
+upload_long="""Update your current character from a file. You can use the following tool to create or edit character files: https://alexan32.github.io/angular-character-editor/
+
+1. Create or edit a character file.
+2. Use the '!playas' command to make sure you are updating the correct character.
+3. click the '+' button in discord and attach the file.
+4. type '!upload' and hit enter to overwrite your active character.
+"""
+
+download_long="""
+!download
+    Download a character file for your current character.
+"""
+
+create_long="""Create a new character. After creating a new character, you probably want to use the '!playas' command to make that character active.
+
+!create <first> <last>
+    Enter a first name and a last name for your character.
+"""
+
+playas_long="""Set your active character
+
+!playas <first>
+    set the character with the provided first name as your active character.
 """

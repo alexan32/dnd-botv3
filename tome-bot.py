@@ -33,8 +33,18 @@ bot.remove_command('help')
 async def help(ctx, command_name: str=None):
     await ctx.message.delete()
     if command_name is None:
+        getting_started = """=====Getting Started=====
+1. '!register' to register yourself as a user.
+2. '!create <first> <last>' to create your first character.
+3. '!playas <first>' to play as your first character.
+
+=====Character Editor=====
+1. '!download' to download your character file,
+2. Edit character at https://alexan32.github.io/angular-character-editor/
+3. '!upload' to update your character.
+"""
         commands_list = '\n'.join([f"- {cmd.name}:".ljust(20) + str(cmd.short_doc) for cmd in bot.commands])
-        help_message = f"=====Help Menu=====\n\n{commands_list}\n\nFor more details type \"!help <command>\""
+        help_message = f"=====Help Menu=====\n\n{commands_list}\n\n{getting_started}\n\nFor more details type \"!help <command>\""
         await ctx.send(f"```{help_message}```", delete_after=120)
     else:
         command = bot.get_command(command_name)
@@ -43,17 +53,12 @@ async def help(ctx, command_name: str=None):
         else:
             await ctx.send(f"```No command called {command_name} found.```", delete_after=15)
 
-LOADED = False
-
 @bot.event
 async def on_ready():
-    
-    if not LOADED:
-        logger.info("loading bot extensions.")
-        await bot.load_extension("bot_extensions.CharacterManagement")
-        await bot.load_extension("bot_extensions.Command")
-        logger.info("======= BOT IS READY! =======")
-        LOADED = True
+    logger.info("loading bot extensions.")
+    await bot.load_extension("bot_extensions.CharacterManagement")
+    await bot.load_extension("bot_extensions.Command")
+    logger.info("======= BOT IS READY! =======")
 
 @bot.event
 async def on_command_error(ctx, error):

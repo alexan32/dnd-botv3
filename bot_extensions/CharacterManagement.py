@@ -10,6 +10,7 @@ import json
 import os
 import requests
 from config.config import UPDATE_FLAG
+from .HelpText import *
 logger = config.LOGGER
 
 class CharacterManagement(commands.Cog):
@@ -40,7 +41,8 @@ class CharacterManagement(commands.Cog):
 
     # switch between characters
     @commands.command(
-        brief="Switch between your saved characters."
+        brief="Switch between your saved characters.",
+        help=playas_long
     )
     async def playas(self, ctx, first, *args):
         await ctx.message.delete()
@@ -50,6 +52,7 @@ class CharacterManagement(commands.Cog):
 
     # create new character
     @commands.command(
+        help=create_long,
         brief="Create a new character with a provided first and last name."
     )
     async def create(self, ctx, first, last, *args):
@@ -64,6 +67,7 @@ class CharacterManagement(commands.Cog):
 
     # download current character as JSON doc
     @commands.command(
+        help=download_long,
         brief="Download a file representing your active character."
     )
     async def download(self, ctx, *args):
@@ -86,7 +90,8 @@ class CharacterManagement(commands.Cog):
 
     # overwrite current character with JSON doc
     @commands.command(
-        brief="Upload a file to overwrite or create a character."
+        brief="Upload a file to overwrite or create a character.",
+        help=upload_long
     )
     async def upload(self, ctx):
         discordId = ctx.author.id
