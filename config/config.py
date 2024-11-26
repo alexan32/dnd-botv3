@@ -16,6 +16,7 @@ CACHE_SIZE = 100000    # 10 Kb
 UPDATE_FLAG = "UPDATE"
 
 def init(stage):
+    print(f"stage: {stage}")
     global STAGE
     global ENVIRONMENT
     global LOGGER

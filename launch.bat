@@ -1,0 +1,1 @@
+python ./tome-bot.py --stage prd
