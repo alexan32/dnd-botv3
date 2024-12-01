@@ -80,11 +80,15 @@ class Command(commands.Cog):
         else:
 
             status, message, character = command.get_active_character(discordId, command.user_table, command.character_table)
-            first = character['first']
-            last = character['last']
 
-            for response in responses:
-                await ctx.send(f"```{first} {last} rolled {response}```")
+            if status != 200:
+                await ctx.send(message)
+            else:
+                first = character['first']
+                last = character['last']
+                for response in responses:
+                    await ctx.send(f"```{first} {last} rolled {response}```")
+
         await delete_after(ctx, 10.0)
 
         

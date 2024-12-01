@@ -14,14 +14,18 @@ def get_active_character(discordId, user_table, character_table):
     data = None
 
     _status, _, user = user_table.get_user(discordId)
-    if _status != 200:
-        return "Encountered an issue. Please try again later."
+    if _status == 404:
+        return 404, "You are not yet registered as a user. See !help to get started.", None
+    elif _status != 200:
+        return 400, "Encountered an issue. Please try again later.", None
     
+
     first = user["activeCharacter"]
     if not first:
-        return 400, "User's active character is not set.", data
+        return 400, "You don't have a character currently selected. See !help to get started.", data
     
-    return character_table.get_character(discordId, first)
+    status, message, character = character_table.get_character(discordId, first)
+    return status, message, character
 
 
 # wrapper for user table

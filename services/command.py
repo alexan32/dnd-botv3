@@ -63,8 +63,9 @@ def aboutme(discordId):
 
 def command_handler(discordId, _input:str):
     status, message, characterData = get_active_character(discordId, user_table, character_table)
+    # print(f"get_active_character response: {status, message, characterData}")
     if status != 200:
-        return [GENERIC_ERROR_MESSAGE]
+        return [message]
     
     messages = []
 

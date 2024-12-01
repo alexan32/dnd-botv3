@@ -55,7 +55,7 @@ class CharacterManagement(commands.Cog):
         help=create_long,
         brief="Create a new character with a provided first and last name."
     )
-    async def create(self, ctx, first, last, *args):
+    async def create(self, ctx, first, last="", *args):
         await ctx.message.delete()
         discordId = ctx.author.id
         template = "5e"
